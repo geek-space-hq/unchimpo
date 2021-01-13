@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'discordrb'
+require 'dotenv'
 
 class Unchimpo
   attr_reader :non_overlap
@@ -31,6 +32,7 @@ class Unchimpo
   end
 end
 
+Dotenv.load
 bot = Discordrb::Bot.new token: ENV['UNCHIMPO_TOKEN']
 game = nil
 
