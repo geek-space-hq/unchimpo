@@ -34,14 +34,14 @@ end
 bot = Discordrb::Bot.new token: ENV['UNCHIMPO_TOKEN']
 game = nil
 
-bot.message(content: 'うんちんぽ') do |event|
+bot.message(content: 'うんちんぽ', in: 'トイレ') do |event|
   if game.nil?
     game = Unchimpo.new
     event.respond('うんちんぽしりとり！w')
   end
 end
 
-bot.message do |event|
+bot.message(in: 'トイレ') do |event|
   break if game.nil?
 
   game = game.input(event.content)
