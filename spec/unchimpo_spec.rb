@@ -11,13 +11,6 @@ RSpec.describe Unchimpo do
       unchimpo = subject.input('うんちんぽ')
       expect(unchimpo.non_overlap.call('うんちんぽ')).to be_nil
     end
-
-    it 'ignoew other than うんちんぽ, うんち, ちんぽ' do
-      expect(subject.input('うんち').non_overlap).not_to eq subject.non_overlap
-      expect(subject.input('ちんぽ').non_overlap).not_to eq subject.non_overlap
-      expect(subject.input('うんちんぽ').non_overlap).not_to eq subject.non_overlap
-      expect(subject.input('うんちいいいい').non_overlap).to eq subject.non_overlap
-    end
   end
 
   describe '#lose?' do
@@ -25,6 +18,11 @@ RSpec.describe Unchimpo do
       expect(
         subject.input('うんち').input('うんち').lose?
       ).to eq true
+    end
+
+    it 'judge as losing when you say other than うんち, ちんぽ, うんちんぽ' do
+      expect(subject.input('うんちいいい').lose?).to eq true
+      expect(subject.input('アンパンマン').lose?).to eq true
     end
   end
 end

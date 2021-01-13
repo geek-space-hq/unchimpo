@@ -11,21 +11,23 @@ class Unchimpo
   end
 
   def input(text)
-    return self unless @non_overlap && %w[うんち ちんぽ うんちんぽ].include?(text)
-
     Unchimpo.new(@non_overlap.call(text))
   end
 
   def lose?
-    @non_overlap.nil?
+    !@non_overlap
   end
 
   private
 
   def generate_non_overlap?(former = nil)
     lambda do |latter|
-      return generate_non_overlap?(latter) unless latter == former
+      return generate_non_overlap?(latter) unless violate?(former, latter)
     end
+  end
+
+  def violate?(former, latter)
+    latter == former || !%w[うんち ちんぽ うんちんぽ].include?(latter)
   end
 end
 
