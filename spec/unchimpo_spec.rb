@@ -1,4 +1,4 @@
-# frozen_stinrg_literal: true
+# frozen_string_literal: true
 
 require 'rspec'
 require_relative '../main'
