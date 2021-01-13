@@ -44,7 +44,7 @@ bot.message(content: 'うんちんぽ', in: 'トイレ') do |event|
 end
 
 bot.message(in: 'トイレ') do |event|
-  break if game.nil?
+  next if game.nil?
 
   game = game.input(event.content)
   if game.lose?
