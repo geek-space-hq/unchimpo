@@ -36,7 +36,9 @@ Dotenv.load
 bot = Discordrb::Bot.new token: ENV['UNCHIMPO_TOKEN']
 game = nil
 
-bot.message(content: 'うんちんぽ', in: 'トイレ') do |event|
+bot.message(in: 'トイレ') do |event|
+  next unless event.content.unicode_normalize == 'うんちんぽ'
+
   if game.nil?
     game = Unchimpo.new
     event.respond('うんちんぽしりとり！w')
@@ -46,7 +48,7 @@ end
 bot.message(in: 'トイレ') do |event|
   next if game.nil?
 
-  game = game.input(event.content)
+  game = game.input(event.content.unicode_normalize)
   if game.lose?
     event.respond("#{event.author.mention} お前の負けw")
     game = nil
